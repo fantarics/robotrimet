@@ -27,15 +27,18 @@ def mint(private):
     w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
     account = Account.from_key(private)
-
-    construct_transaction(
-        account,
-        w3,
-        from_address=account.address,
-        to_address=w3.to_checksum_address("0x68dc8D3ab93220e84b9923706B3DDc926C77f1Df"),
-        value=0,
-        data=mint_data
-    )
+    try:
+        construct_transaction(
+            account,
+            w3,
+            from_address=account.address,
+            to_address=w3.to_checksum_address("0x68dc8D3ab93220e84b9923706B3DDc926C77f1Df"),
+            value=0,
+            data=mint_data
+        )
+        print("+1", account.address)
+    except:
+        return
 
 
 async def main():
